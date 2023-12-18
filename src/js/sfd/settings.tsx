@@ -10,11 +10,13 @@ const Setting: (props: SettingProps) => JSX.Element = ({ name, type, onChange, c
             name={name}
             value={value}
             onChange={(event) => {
-                let changedValue: number | boolean | null = null;
+                let changedValue: number | boolean | string | null = null;
                 if (type == 'radio') {
                     changedValue = parseInt(event.target.value);
                 } else if (type == 'checkbox') {
                     changedValue = event.target.checked;
+                } else if (type == 'text') {
+                    changedValue = event.target.value;
                 }
 
                 onChange(name, changedValue);
@@ -29,7 +31,7 @@ const Setting: (props: SettingProps) => JSX.Element = ({ name, type, onChange, c
 const Settings: (props: SettingsProps) => JSX.Element = (props) => {
     const [settings, setSettings] = useState<DSSettings>(props.settings)
 
-    const settingChanged = (name: string, value: number | boolean | null) => {
+    const settingChanged = (name: string, value: number | boolean | string | null) => {
         if (value == null)
             return;
 
@@ -81,6 +83,14 @@ const Settings: (props: SettingsProps) => JSX.Element = (props) => {
             title='Deezer'
             checked={settings.defaultSearchSource == constants.searchSources.deezer.value}
             onChange={settingChanged}
+        />
+        <Setting
+            type='text'
+            name='youTubeKey'
+            value={settings.youTubeKey}
+            title='YouTube Key'
+            onChange={settingChanged}
+            checked={false}
         />
     </div>;
 }

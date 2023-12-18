@@ -6,10 +6,10 @@ declare var dataLayer: any
 type SettingProps = React.PropsWithChildren<{
     type: string,
     name: string,
-    value?: number,
+    value?: number | string,
     title: string,
     checked: boolean,
-    onChange: (name: string, value: number | boolean | null) => void
+    onChange: (name: string, value: number | boolean | string | null) => void
 }>
 
 type SettingsProps = {
@@ -60,7 +60,8 @@ interface DSOptions {
 interface DSSettings {
     defaultSearchSource: number,
     autoPlayTrack: boolean,
-    autoPlayRelease: boolean
+    autoPlayRelease: boolean,
+    youTubeKey: string
 }
 
 interface DSStorageSettings {
